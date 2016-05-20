@@ -1,0 +1,13 @@
+<% @title_args = {:name => @form.name, :standardized => @form.standardized?} %>
+<% content_for :title_content do %>
+  <% if @form.published? %>
+    <style type="text/css"> nav { display: none; } .reqd-sym { display: inline; } </style>
+    <div id="printable_form">
+      <h1 class="title"><%= @form.name %></h1>
+      <div class="mission"><%= current_mission.try(:name) || "[#{t('form.no_mission')}]" %></div>
+      <hr/>
+
+      <%= render 'form_items/web', items: @form.arrange_descendants %>
+    </div>
+  <% end %>
+<% end %>

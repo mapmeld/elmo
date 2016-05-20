@@ -9,7 +9,7 @@ class FormsController < ApplicationController
   before_filter :load_form, :only => [:show, :edit, :update]
 
   # authorization via cancan
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:webshow]
 
   # We manually authorize these against :download.
   skip_authorize_resource only: [:odk_manifest, :odk_itemsets]
@@ -55,6 +55,11 @@ class FormsController < ApplicationController
 
   def edit
     prepare_and_render_form
+  end
+
+  def webshow
+    authorize!(:download, Form)
+    @form = Form.find(params[:id])
   end
 
   def show
