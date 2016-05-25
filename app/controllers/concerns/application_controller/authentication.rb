@@ -32,7 +32,6 @@ module Concerns::ApplicationController::Authentication
 
       # Special unauthenticated request.
       if params[:direct_auth] == 'none'
-
         process_noauth
 
       # HTTP Basic authenticated request.
@@ -71,7 +70,10 @@ module Concerns::ApplicationController::Authentication
     end
 
     unless params[:data] && params[:data][:username]
-      return render_noauth_submission_failure :text => 'USERNAME_NOT_SPECIFIED', :status => :unauthorized
+      #return render_noauth_submission_failure :text => 'USERNAME_NOT_SPECIFIED', :status => :unauthorized
+      # support anon user
+      params[:data] = {}
+      params[:data][:username] = "anon"
     end
 
     unless @current_user = User.where(:login => params[:data][:username]).first

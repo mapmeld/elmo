@@ -6,7 +6,8 @@
       <h1 class="title"><%= @form.name %></h1>
       <div class="mission"><%= current_mission.try(:name) || "[#{t('form.no_mission')}]" %></div>
       <hr/>
-      <%= form_for @form do |f| %>
+      <%= form_for @form, url: "/m/#{current_mission.try(:compact_name)}/noauthweb/submission", method: 'post' do |f| %>
+        <%= f.hidden_field(:id, name: 'form_id')  %>
         <%= f.fields_for :form_items do |cf| %>
           <%= render 'form_items/web', item: cf %>
         <% end %>

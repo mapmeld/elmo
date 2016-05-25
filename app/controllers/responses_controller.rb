@@ -191,9 +191,12 @@ class ResponsesController < ApplicationController
 
   # handles creating/updating for the web form
   def web_create_or_update
+    if @response.form.nil?
+      @response.form = Form.find(params[:form_id])
+    end
+
     check_form_exists_in_mission
 
-    # set source/modifier to web
     @response.source = "web" if params[:action] == "create"
     @response.modifier = "web"
 
