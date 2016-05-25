@@ -58,7 +58,7 @@ class FormsController < ApplicationController
   end
 
   def webshow
-    authorize!(:download, Form)
+    authorize!(:respond, Form)
     @form = Form.find(params[:id])
   end
 

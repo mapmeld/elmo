@@ -29,6 +29,8 @@ class Ability
 
     raise "Mission should be nil if mode is not 'mission'" if mode != "mission" && !mission.nil?
 
+    can :respond, Form
+
     if user
 
       # anybody can see the welcome page
