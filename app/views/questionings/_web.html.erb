@@ -1,22 +1,24 @@
-<div class="question <%= "depth-#{qing.depth}" %><%= qing.condition ? ' conditional' : '' %>">
+<div class="question <%= "depth-#{qing.object.depth}" %><%= qing.object.condition ? ' conditional' : '' %>">
   <div class="name">
-    <% if qing.condition %>
-      <div class="condition"><%= t("question.answer_only_caps") %> <%= qing.condition.to_s %></div>
+    <% if qing.object.condition %>
+      <div class="condition">
+        <%= t("question.answer_only_caps") %> <%= qing.object.condition.to_s %>
+      </div>
     <% end %>
     <h3 class="name">
-      <%= qing.full_dotted_rank %>. <%= reqd_sym if qing.required? %>
-      <%= qing.question.name %>
+      <%= qing.object.full_dotted_rank %>. <%= reqd_sym if qing.object.required? %>
+      <%= qing.object.question.name %>
     </h3>
-    <% unless qing.question.hint.blank? %>
-      <i class="hint"><%= qing.question.hint %></i>
+    <% unless qing.object.question.hint.blank? %>
+      <i class="hint"><%= qing.object.question.hint %></i>
     <% end %>
   </div>
-  <div class="answer <%= qing.qtype_name %>_answer">
+  <div class="answer <%= qing.object.qtype_name %>_answer">
     <% # print options if necessary %>
-    <% if qing.has_options? %>
-      <% qing.options.each do |opt| %>
+    <% if qing.object.has_options? %>
+      <% qing.object.options.each do |opt| %>
         <label class="option">
-          <input name="<%= qing.id %>" type="radio" class="option_box"/>
+          <%= radio_button(qing, :response, opt.name, class: "option_box") %>
           <%= opt.name %>
         </label>
       <% end %>

@@ -1,10 +1,10 @@
-<% items.each do |item, subitems| %>
-  <% if item.is_a?(QingGroup) %>
-    <% if !subitems.empty? %>
-      <%= render 'qing_groups/web', qing_group: item %>
-      <%= render 'form_items/web', items: subitems %>
+<% if item.object.is_a?(QingGroup) %>
+  <% if !item.object.children.empty? %>
+    <%= render 'qing_groups/web', qing_group: item %>
+    <%= item.fields_for :children do |child| %>
+      <%= render 'form_items/web', item: child %>
     <% end %>
-  <% elsif item.printable? %>
-    <%= render 'questionings/web', qing: item %>
   <% end %>
+<% elsif item.object.present? && item.object.printable? %>
+  <%= render 'questionings/web', qing: item %>
 <% end %>

@@ -8,6 +8,9 @@ class Form < ActiveRecord::Base
   has_many(:whitelistings, as: :whitelistable, class_name: "Whitelisting", dependent: :destroy)
   has_many(:standard_form_reports, class_name: "Report::StandardFormReport", dependent: :destroy)
 
+  has_many :form_items
+  accepts_nested_attributes_for :form_items
+
   # while a form has many versions, this is a reference to the most up-to-date one
   belongs_to(:current_version, class_name: "FormVersion")
 

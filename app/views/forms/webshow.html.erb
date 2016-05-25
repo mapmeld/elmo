@@ -6,8 +6,15 @@
       <h1 class="title"><%= @form.name %></h1>
       <div class="mission"><%= current_mission.try(:name) || "[#{t('form.no_mission')}]" %></div>
       <hr/>
-
-      <%= render 'form_items/web', items: @form.arrange_descendants %>
+      <%= form_for @form do |f| %>
+        <%= f.fields_for :form_items do |cf| %>
+          <%= render 'form_items/web', item: cf %>
+        <% end %>
+        <br/><br/>
+        <%= f.submit class: "btn btn-default" %>
+      <% end %>
     </div>
+  <% else %>
+    <h1>This form is no longer available.</h1>
   <% end %>
 <% end %>

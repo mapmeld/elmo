@@ -147,6 +147,7 @@ GEM
     cliver (0.3.2)
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
+    coderay (1.1.1)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -230,6 +231,7 @@ GEM
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     metaclass (0.0.4)
+    method_source (0.8.2)
     middleware (0.1.0)
     mime-types (2.99)
     mimemagic (0.3.0)
@@ -269,6 +271,12 @@ GEM
       multi_json (~> 1.0)
       websocket-driver (>= 0.2.0)
     powerpack (0.1.1)
+    pry (0.10.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    pry-rails (0.3.4)
+      pry (>= 0.9.10)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -377,6 +385,7 @@ GEM
       rubyzip (~> 1.0)
       websocket (~> 1.0)
     sexp_processor (3.0.10)
+    slop (3.6.0)
     spinjs-rails (1.3)
       rails (>= 3.1)
     spring (1.3.3)
@@ -495,6 +504,7 @@ DEPENDENCIES
   paperclip
   phantomjs_polyfill-rails
   poltergeist (~> 1.6)
+  pry-rails
   rack-attack!
   rails (= 4.2.5)
   rails-backbone!
@@ -528,3 +538,6 @@ DEPENDENCIES
   whenever
   will_paginate
   will_paginate-bootstrap
+
+BUNDLED WITH
+   1.12.4
