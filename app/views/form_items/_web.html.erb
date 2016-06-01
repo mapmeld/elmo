@@ -5,6 +5,6 @@
       <%= render 'form_items/web', item: child %>
     <% end %>
   <% end %>
-<% elsif item.object.present? && item.object.printable? %>
+<% elsif item.object.present? %>
   <%= render 'questionings/web', qing: item %>
 <% end %>

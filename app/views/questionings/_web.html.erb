@@ -22,8 +22,43 @@
           <%= opt.name %>
         </label>
       <% end %>
+    <% elsif qing.object.qtype_name == 'text' %>
+      <%= text_field(qing, :response) %>
+    <% elsif qing.object.qtype_name == 'location' %>
+      <div>Geolocation:
+        <span class='geolocate-status'>incomplete</span>
+      </div>
+      <%= hidden_field(qing, :response, class: 'geolocate-me') %>
+      <script type="text/javascript">
+        function showPosition(position) {
+          var geolocation = position.coords.latitude + ',' + position.coords.longitude;
+          $('.geolocate-me').val(geolocation);
+          $('.geolocate-status').text('succeeded');
+        }
+        function showError(err) {
+          $('.geolocate-status').text(JSON.stringify(error));
+        }
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+          $('.geolocate-status').text('not supported');
+        }
+      </script>
+    <% elsif qing.object.qtype_name == 'integer' %>
+      <%= number_field(qing, :response) %>
+    <% elsif qing.object.qtype_name == 'date' %>
+      <span>Today's date</span>
+      <%= date_field(qing, :response, value: Date.today) %>
+    <% elsif qing.object.qtype_name == 'time' %>
+      <span>Current time</span>
+      <%= time_field(qing, :response, value: Time.now.strftime("%T.%L")) %>
+    <% elsif qing.object.qtype_name == 'image' %>
+      <%= file_field(qing, :response) %>
     <% else %>
-      <div class="answer_box"></div>
+      <div>
+        No web form field for:
+        <%= qing.object.qtype_name %>
+      </div>
     <% end %>
   </div>
 </div>
