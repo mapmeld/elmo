@@ -60,6 +60,7 @@ class FormsController < ApplicationController
   def webshow
     authorize!(:respond, Form)
     @form = Form.find(params[:id])
+    render :webshow, layout: 'mobileweb'
   end
 
   def show
